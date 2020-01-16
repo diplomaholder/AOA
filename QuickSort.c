@@ -1,4 +1,4 @@
-#include"diploma.h"
+#include"time_handler.h"
 int partition(int a[], int low, int high)
 {
     int i = low;

@@ -1,4 +1,4 @@
-#include"diploma.h"
+#include"time_handler.h"
 void insertionSort(int temp[],int n)
 {
     int i,j,val;

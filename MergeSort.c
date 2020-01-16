@@ -1,4 +1,4 @@
-#include"diploma.h"
+#include"time_handler.h"
 void simplemerge(int a[], int low, int mid, int high)
 {
     int temp[1000000],k=0;
