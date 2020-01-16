@@ -1,5 +1,5 @@
 #include"time_handler.h"
-void insertionSort(int temp[],int n)
+void selectionSort(int temp[],int n)
 {
     int i,j,val,pos;
     for(i=0;i<n-1;i++)
@@ -17,13 +17,24 @@ void insertionSort(int temp[],int n)
         temp[i] = val;
     }
 }
+
+void casegen()
+{
+    int temp[50000],n,start=100,end=1000;
+    FILE *fpbest = fopen("sbest.csv", "w");
+    for(n=5000; n<=25000; n=n+500)
+    {
+        genRandomFile2(n,"test.txt",start,end);
+        readRandomFile("test.txt",temp);
+        clock_t t1 = clock();
+        selectionSort(temp, n);
+        t1 = clock() - t1;
+        fprintf(fpbest, "%d, ",(int)t1);        
+    }
+    fclose(fpbest);
+}
+
 void main()
 {
-    int temp[10000],n=10000,start=100,end=1000;
-    genRandomFile2(n,"test.txt",start,end);
-    readRandomFile("test.txt",temp);
-    clock_t t = clock();
-    insertionSort(temp,n);
-    t = clock() - t;
-    printf("Time Taken:%fs\n",(double)t/CLOCKS_PER_SEC);
+    casegen();
 }

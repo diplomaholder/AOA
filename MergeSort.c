@@ -35,13 +35,24 @@ void mergesort(int a[], int low, int high)
         simplemerge(a,low,mid,high); 
     }
 }
+
+void casegen()
+{
+    int temp[50000],n,start=100,end=1000;
+    FILE *fpbest = fopen("mbest.csv", "w");
+    for(n=5000; n<=25000; n=n+500)
+    {
+        genRandomFile2(n,"test.txt",start,end);
+        readRandomFile("test.txt",temp);
+        clock_t t1 = clock();
+        mergesort(temp, 0, n-1);
+        t1 = clock() - t1;
+        fprintf(fpbest, "%d, ",(int)t1);        
+    }
+    fclose(fpbest);
+}
+
 void main()
 {
-    int temp[1000000],i,n=1000000,start=100,end=1000;
-    genRandFile2(n,"test.txt",start,end);
-    readRandFile("test.txt",temp);
-    clock_t t = clock();
-    mergesort(temp,0,n-1);
-    t = clock()-t;
-    printf("Time taken %fs\n",((double)t/CLOCKS_PER_SEC));
+    casegen();
 }

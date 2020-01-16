@@ -31,13 +31,31 @@ void quicksort(int a[], int low, int high)
         quicksort(a,pos+1,high);
     }
 }
+
+void casegen()
+{
+    int temp[50000],n,start=100,end=1000;
+    FILE *fpworst = fopen("qworst.csv", "w");
+    FILE *fpbest = fopen("qbest.csv", "w");
+    for(n=5000; n<=25000; n=n+500)
+    {
+        genRandomFile2(n,"test.txt",start,end);
+        readRandomFile("test.txt",temp);
+        clock_t t1 = clock();
+        quicksort(temp, 0, n);
+        t1 = clock() - t1;
+        fprintf(fpbest, "%d, ",(int)t1);
+        clock_t t2 = clock();
+        quicksort(temp, 0, n);
+        t2 = clock() - t2;
+        fprintf(fpworst,"%d, ",(int)t2);
+        
+    }
+    fclose(fpbest);
+    fclose(fpworst);
+}
+
 void main()
 {
-    int temp[1000000],i,n=1000000,start=100,end=1000;
-    genRandFile2(n,"test.txt",start,end);
-    readRandFile("test.txt",temp);
-    clock_t t = clock();
-    quicksort(temp,0,n-1);
-    t = clock()-t;
-    printf("Time taken %fs\n",((double)t/CLOCKS_PER_SEC));
+    casegen();
 }
