@@ -42,19 +42,17 @@ void casegen()
         genRandomFile2(n,"test.txt",start,end);
         readRandomFile("test.txt",temp);
         clock_t t1 = clock();
-        quicksort(temp, 0, n);
+        quicksort(temp,0,n-1);
         t1 = clock() - t1;
-        fprintf(fpbest, "%d, ",(int)t1);
+        fprintf(fpworst, "%lf,",(double)t1/CLOCKS_PER_SEC);
         clock_t t2 = clock();
-        quicksort(temp, 0, n);
+        quicksort(temp, 0,n-1);
         t2 = clock() - t2;
-        fprintf(fpworst,"%d, ",(int)t2);
-        
+        fprintf(fpbest,"%lf,",(double)t2/CLOCKS_PER_SEC);
     }
     fclose(fpbest);
     fclose(fpworst);
 }
-
 void main()
 {
     casegen();

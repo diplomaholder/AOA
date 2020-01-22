@@ -39,7 +39,7 @@ void mergesort(int a[], int low, int high)
 void casegen()
 {
     int temp[50000],n,start=100,end=1000;
-    FILE *fpbest = fopen("mbest.csv", "w");
+    FILE *fpbest = fopen("mAverage.csv", "w");
     for(n=5000; n<=25000; n=n+500)
     {
         genRandomFile2(n,"test.txt",start,end);
@@ -47,7 +47,7 @@ void casegen()
         clock_t t1 = clock();
         mergesort(temp, 0, n-1);
         t1 = clock() - t1;
-        fprintf(fpbest, "%d, ",(int)t1);        
+        fprintf(fpbest, "%f, ",(double)t1/CLOCKS_PER_SEC);        
     }
     fclose(fpbest);
 }
