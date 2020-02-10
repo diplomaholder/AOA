@@ -11,15 +11,9 @@ with open('bworst.csv','r') as csvfile:
     for row in plots:
         for i in row:
             y1.append(float(i))
-with open('lbworst.csv','r') as csvfile:
-    plots = csv.reader(csvfile, delimiter=',')
-    for row in plots:
-        for i in row:
-            y2.append(float(i))
 
 plt.title('Min Max Time Complexity')
-plt.plot(x,y1, label='Linear')
-plt.plot(x,y2, label='Recursive Divide and Conquer')
+plt.plot(x,y1, label='Divide and Conquer')
 plt.xlabel('Inputs')
 plt.ylabel('Time Taken')
 plt.legend()
