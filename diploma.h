@@ -64,28 +64,28 @@ void genRandomGraphFile(int n,char *filename,int start,int end)
     }
     fclose(fp);
 }
-int* readRandomGraphFile(char *filename,int* temp,int n)
+
+void readRandomGraphFile(char *filename,int temp[4000][4000],int n)
 {
     FILE *fp = fopen(filename,"r");
-    int i=0,j=0,t;
+    int i=1,j=1,t;
     while(fscanf(fp,"%d",&t)==1)
     {
-        if(*((temp + i)+j)!=0){
-            *((temp + j)+i) = *((temp + i)+j);
-            continue;
-        }
-        if(i==j)
-        {
-            *((temp + j)+i) = 0;
-            continue;
-        }
-        *((temp + j)+i) = t;
+        temp[i][j] = t;
         j++;
-        if(j==n)
+        if(j==n+1)
         {
             j=0;
             i++;
         }
     }   
-    return temp;
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            if(temp[i][j])
+                temp[j][i] = temp[i][j];
+        }
+    }
+    fclose(fp);
 }
